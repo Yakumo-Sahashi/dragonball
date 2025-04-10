@@ -14,7 +14,7 @@ const Personajes = () => {
     });
   },[]);
   return (
-    <div classNameName="container" style={{height:"100vh"}}>
+    <div className="container" style={{height:"100vh"}}>
       <div className="row justify-content-center py-4 text-white">	
         <div className="col-md-4">
           <img className="img-fluid mx-auto" src={img1} alt="Personajes" />
