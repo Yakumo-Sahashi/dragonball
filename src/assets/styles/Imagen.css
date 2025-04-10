@@ -1,0 +1,23 @@
+body{
+    background: url("../img/bg02.jpg") fixed no-repeat 0 0;
+	background-size: cover;
+	background-position: center center;
+	background-color: #f5f5f5;
+    color: #fff;
+}
+
+
+.bg-black{
+    background: rgba(0,0,0,0.3);
+    border-bottom: 3px solid #00a1fe;
+    color: #fff;
+}
+
+.btn-black{
+    background: rgb(0,0,0,0.5);
+    color: #fff;
+    &:hover{
+        background: rgb(0,0,0,0.5);
+        color: #fff; 
+    }
+}
