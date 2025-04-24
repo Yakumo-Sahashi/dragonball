@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 
 const Registro = () => {
   return (
-    <div classNameName="container" style={{height:"100vh"}}>
+    <div classNameName="container">
       <div className="row justify-content-center py-4 text-white login">		
         <div className="d-none d-md-block col-md-4 bg-registro-a borde-t borde-b" data-aos="fade-down" data-aos-duration="3000">
         </div>

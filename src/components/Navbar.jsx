@@ -1,4 +1,6 @@
 import { useRef } from "react";
+import {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
+import { faHornbill} from "@fortawesome/free-brands-svg-icons";
 import esfera from "../assets/img/favicon.png";
 import { NavLink } from "react-router-dom";
 
@@ -27,7 +29,7 @@ const Navbar = () => {
                             <NavLink className="btn btn-dark " to="/">Inicio</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="btn btn-dark" to="/personajes">Personajes</NavLink>
+                            <NavLink className="btn btn-dark" to="/personajes"><FontAwesomeIcon icon={faHornbill} className="me-2" />Personajes</NavLink>
                         </li>
                         <li className="nav-item">
                             <NavLink className="btn btn-dark" to="/arcos">Arcos</NavLink>

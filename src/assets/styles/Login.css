@@ -1,3 +1,6 @@
+:root{
+	--primary: #ee8700;
+}
 .bg-login-a{
     background: url('../img/login.jpg'); 
     height: 85vh; 
@@ -26,22 +29,22 @@
 .btn-login{
     outline: none;
     background: rgba(0, 0, 0, .7);
-    border: 1px solid #ee0000;
+    border: 1px solid var(--primary);
     border-radius: 5px;
-    color: #ee0000;
+    color: var(--primary);
     &:hover{
         outline: none;
         background: rgba(0, 0, 0, .5);
-        border: 1px solid #c20202;
+        border: 1px solid var(--primary);
         border-radius: 5px;
         color: #fff;
         transition: all 0.5s ease;
-        box-shadow: 3px 3px 3px rgba(226, 0, 0, 0.7), -3px -3px 3px rgba(226, 0, 0, 0.7);
+        box-shadow: 3px 3px 3px rgba(226, 102, 0, 0.7), -3px -3px 3px rgba(226, 102, 0, 0.7);
     }
     &:active{
         outline: none;
         background: rgba(0, 0, 0, .5);
-        border: 1px solid #ee0000;
+        border: 1px solid var(--primary);
         border-radius: 5px;
         color: #fff;
         transition: all 0.5s ease;
@@ -55,7 +58,7 @@
     color: #fff;
     border-radius: 6px;
     border: none;
-    border-bottom: 2px solid #ee0000;
+    border-bottom: 2px solid var(--primary);
 }
 
 .form-floating input:focus{

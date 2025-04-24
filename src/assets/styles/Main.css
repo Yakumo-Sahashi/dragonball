@@ -1,3 +1,7 @@
+:root{
+	--primary: #ee8700;
+}
+
 body{
     background: url("../img/bg01.jpg") fixed no-repeat 0 0;
 	background-size: cover;
@@ -5,9 +9,13 @@ body{
 }
 
 .bg-black{
-    background: rgba(0,0,0,0.3);
-    border-bottom: 1px solid #ee0000;
+    background-color: rgba(0,0,0,0.3);
+    border-bottom: 1px solid var(--primary);
     color: #fff;
+}
+
+.btn{
+	background: none;
 }
 
 .btn-dark{
@@ -15,8 +23,18 @@ body{
 	border: none;
 	background: none;
 	&:hover{
-		color: #ee0000;
-		border:#ee0000;
+		color: var(--primary);
+		border:var(--primary);
+		background: none;
+	}
+	&:active{
+		color: var(--primary);
+		border:var(--primary);
+		background: none;
+	}
+	&:focus{
+		color: var(--primary);
+		border:var(--primary);
 		background: none;
 	}
 }
