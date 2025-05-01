@@ -1,20 +1,35 @@
-import { useRef } from "react";
 import {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
 import { faHornbill} from "@fortawesome/free-brands-svg-icons";
+import { faRightFromBracket,faUser,faUserPen} from "@fortawesome/free-solid-svg-icons";
 import esfera from "../assets/img/favicon.png";
-import { NavLink } from "react-router-dom";
+import { useRef,useContext,useEffect } from "react";
+import { NavLink,useNavigate } from "react-router-dom";
+import Contexto from "../context/Contexto";
 
 const Navbar = () => {
     const refMenu = useRef();
-    document.addEventListener("DOMContentLoaded", () =>{
-        window.addEventListener("scroll", () => {
-            if (window.scrollY  > refMenu.current.offsetTop) {
-               refMenu.current.classList.add('menu-fixed');
-            } else {
-               refMenu.current.classList.remove('menu-fixed');
+    useEffect(() => {
+        const handleScroll = () => {
+            if (refMenu.current) {
+                if (window.scrollY > refMenu.current.offsetTop) {
+                    refMenu.current.classList.add('menu-fixed');
+                } else {
+                    refMenu.current.classList.remove('menu-fixed');
+                }
             }
-        });    
-    });
+        };      
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };          
+    }, []);
+
+    const {cerrar_sesion} = useContext(Contexto);
+    const navegacion = useNavigate();
+    const finalizar_sesion = () =>{
+        navegacion("/login",{replace:true});
+        cerrar_sesion();
+    }
 
     return (
         <nav ref={refMenu} className="navbar navbar-expand-lg navbar-light bg-black">
@@ -39,8 +54,17 @@ const Navbar = () => {
                         </li>
                     </ul>
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
-                        <li className="nav-item">
-                            <NavLink className="btn btn-dark" to="/login">Iniciar Sesion</NavLink>
+                        <li className="nav-item dropdown">
+                            <button type='button' className="btn btn-dark dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <FontAwesomeIcon icon={faUser} className="me-2"/>Usuario
+                            </button>
+                            <ul className="dropdown-menu bg-black" aria-labelledby="navbarDropdown">
+                                <li><NavLink className="btn btn-dark w-100" to="/"><FontAwesomeIcon icon={faUserPen} className="me-2" />Editar cuenta</NavLink></li>
+                                <li><hr className="dropdown-divider"/></li>
+                                <li>
+                                    <button type='button' onClick={finalizar_sesion} className="btn btn-dark text-danger w-100"><FontAwesomeIcon icon={faRightFromBracket} className="me-2" />Cerrar Sesion</button>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </div>

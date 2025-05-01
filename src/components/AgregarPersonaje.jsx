@@ -14,29 +14,29 @@ const AgregarPersonaje = () => {
                         <div className="col-md-6">
                             <div className="form-floating mb-3">
                                 <input type="text" className="form-control" placeholder="Nombre"/>
-                                <label for="nombre" className="form-label text-warning">Nombre</label>
+                                <label htmlFor="nombre" className="form-label text-warning">Nombre</label>
                             </div>                            
                             <div className="form-floating mb-3">
                                 <input type="text" className="form-control" placeholder="Nombre Alterno"/>
-                                <label for="nombre_alterno" className="form-label text-warning">Nombre Alterno</label>
+                                <label htmlFor="nombre_alterno" className="form-label text-warning">Nombre Alterno</label>
                             </div>                            
                             <div className="form-floating mb-3">
                                 <input type="text" className="form-control" placeholder="Fecha Nacimiento"/>
-                                <label for="nacimiento" className="form-label text-warning">Fecha Nacimiento</label>
+                                <label htmlFor="nacimiento" className="form-label text-warning">Fecha Nacimiento</label>
                             </div>                            
                         </div>
                         <div className="col-md-6">
                             <div className="form-floating mb-3">
                                 <input type="text" className="form-control" placeholder="Procedencia"/>
-                                <label for="procedencia" className="form-label text-warning">Procedencia</label>
+                                <label htmlFor="procedencia" className="form-label text-warning">Procedencia</label>
                             </div>                            
                             <div className="form-floating mb-3">
                                 <input type="text" className="form-control" placeholder="Especie"/>
-                                <label for="especie" className="form-label text-warning">Especie</label>
+                                <label htmlFor="especie" className="form-label text-warning">Especie</label>
                             </div>                            
                             <div className="form-floating mb-3">
                                 <input type="text" className="form-control" placeholder="URL Imagen"/>
-                                <label for="img" className="form-label text-warning">URL Imagen</label>
+                                <label htmlFor="img" className="form-label text-warning">URL Imagen</label>
                             </div>                            
                         </div>
                     </div>

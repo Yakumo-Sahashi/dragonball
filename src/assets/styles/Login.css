@@ -6,8 +6,10 @@
     height: 85vh; 
     background-position: center;
 	background-size: cover;
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-top: 2px solid var(--primary);
+    border-bottom: 2px solid var(--primary);
 }
 
 .bg-registro-a{
@@ -15,15 +17,19 @@
     height: 85vh; 
     background-position: center;
 	background-size: cover;
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-top: 2px solid var(--primary);
+    border-bottom: 2px solid var(--primary);
 }
 
 
 .bg-login-b{
     background: rgb(0, 0, 0, 0.5);
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-top: 2px solid var(--primary);
+    border-bottom: 2px solid var(--primary);
 }
 
 .btn-login{
@@ -52,29 +58,27 @@
     }
 }
 
-
 .form-floating input{
     background: none;
     color: #fff;
     border-radius: 6px;
     border: none;
     border-bottom: 2px solid var(--primary);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    &:focus{
+        background: rgb(0, 0, 0, 0.5);
+        color: #fff;
+        outline: none;
+        box-shadow: 0 0 8px 2px var(--primary);
+        border-color: var(--primary);
+    }
+    &:read-only{
+        background: rgb(0, 0, 0, 0.5);
+        color: #fff;
+    }
+    &:disabled {
+        background: rgb(0, 0, 0, 0.5);
+        color: #fff;
+        opacity: 1;
+    }
 }
-
-.form-floating input:focus{
-    background: rgb(0, 0, 0, 0.5);
-    color: #fff;
-}
-
-.form-floating input:read-only{
-    background: rgb(0, 0, 0, 0.5);
-    color: #fff;
-}
-
-.form-floating input:disabled {
-	background: rgb(0, 0, 0, 0.5);
-    color: #fff;
-	opacity: 1;
-}
-
-
