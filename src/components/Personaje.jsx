@@ -31,7 +31,7 @@ const Personaje = ({url,nombre,procedencia,nombre_alterno,nacimiento,especie}) =
         <div className="card-body">
           <div className="row">
             <div className="col-4 col-md-5">
-              <div className='card-img-p py-0' style={{"background-image":`url(${url})`}}></div>
+              <div className='card-img-p py-0' style={{"backgroundImage":`url(${url})`}}></div>
             </div>
             <div className="col-8 col-md-7">
               <h3 className='text-white mt-1'><FontAwesomeIcon icon={faPhoenixSquadron} className="me-2 text-warning" /><b>{nombre}</b></h3>

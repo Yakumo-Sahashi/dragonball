@@ -1,15 +1,20 @@
 import types from './types.js';
 
-const MiReducer = (state={},action) => {
-  switch(action.type){
+const MiReducer = (state = {}, action) => {
+  switch (action.type) {
     case types.login:
-      return {estado:true}
+      return {
+        logged: true,
+        usuario: action.payload
+      };
     case types.logout:
-      return {estado:false}
+      return {
+        logged: false,
+        usuario: null
+      };
     default:
       return state;
   }
-}
+};
 
 export default MiReducer;
-

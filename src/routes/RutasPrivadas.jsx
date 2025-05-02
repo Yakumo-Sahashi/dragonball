@@ -5,8 +5,8 @@ import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 
 const RutasPrivadas = ({children}) => {
-    const {estado} = useContext(Contexto);
-    return (estado) ? <><Navbar/> {children} <Footer/></> : <Navigate to="/login"></Navigate> ;
+    const {usuario} = useContext(Contexto);
+    return (usuario) ? <><Navbar/> {children} <Footer/></> : <Navigate to="/login"></Navigate> ;
 }
 
 export default RutasPrivadas;

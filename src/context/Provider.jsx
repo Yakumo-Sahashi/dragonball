@@ -4,27 +4,30 @@ import MiReducer from './MiReducer.jsx';
 import types from './types.js';
 
 const inicio = () =>{
-  const valor = localStorage.getItem("estado");
+  const user = localStorage.getItem("usuario");
   return {
-    estado: !!valor
+    logged:!!user,
+    usuario: user
   }
 }
 const Provider = ({children}) => {
   const [logeado,dispatch] = useReducer(MiReducer,{},inicio);
 
-  const login = () =>{
+  const login = (sesion) =>{
     const action = {
-      type:types.login
+      type:types.login,
+      payload:sesion
     }
-    localStorage.setItem("estado",true);
+    localStorage.setItem("usuario",JSON.stringify(sesion));
     dispatch(action);
   }
 
   const cerrar_sesion = () => {
     const action = {
-      type:types.logout
+      type:types.logout,
+      payload:null
     }
-    localStorage.removeItem("estado")
+    localStorage.removeItem("usuario")
     dispatch(action)
   }
   return (

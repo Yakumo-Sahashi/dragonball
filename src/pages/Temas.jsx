@@ -5,7 +5,7 @@ const Temas = () => {
   const [contenido,setContenido] = useState([]);
 
   useEffect(()=>{
-    fetch("http://localhost:3000/personajes")
+    fetch("http://localhost:3001/personajes")
     .then((respuesta) => respuesta.json())
     .then((respuesta) => {
       setContenido(respuesta);

@@ -2,7 +2,7 @@
 	--primary: #ee8700;
 }
 .bg-login-a{
-    background: url('../img/login.jpg'); 
+    background: url('../img/login2.jpg'); 
     height: 85vh; 
     background-position: center;
 	background-size: cover;
@@ -13,7 +13,7 @@
 }
 
 .bg-registro-a{
-    background: url('../img/registro.jpg'); 
+    background: url('../img/login.jpg'); 
     height: 85vh; 
     background-position: center;
 	background-size: cover;
@@ -58,27 +58,3 @@
     }
 }
 
-.form-floating input{
-    background: none;
-    color: #fff;
-    border-radius: 6px;
-    border: none;
-    border-bottom: 2px solid var(--primary);
-    transition: box-shadow 0.3s ease, border-color 0.3s ease;
-    &:focus{
-        background: rgb(0, 0, 0, 0.5);
-        color: #fff;
-        outline: none;
-        box-shadow: 0 0 8px 2px var(--primary);
-        border-color: var(--primary);
-    }
-    &:read-only{
-        background: rgb(0, 0, 0, 0.5);
-        color: #fff;
-    }
-    &:disabled {
-        background: rgb(0, 0, 0, 0.5);
-        color: #fff;
-        opacity: 1;
-    }
-}

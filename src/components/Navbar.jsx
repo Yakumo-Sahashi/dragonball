@@ -24,7 +24,8 @@ const Navbar = () => {
         };          
     }, []);
 
-    const {cerrar_sesion} = useContext(Contexto);
+    const {cerrar_sesion,usuario} = useContext(Contexto);
+    const data_user = typeof usuario != 'object' ? JSON.parse(usuario) : usuario;
     const navegacion = useNavigate();
     const finalizar_sesion = () =>{
         navegacion("/login",{replace:true});
@@ -32,7 +33,7 @@ const Navbar = () => {
     }
 
     return (
-        <nav ref={refMenu} className="navbar navbar-expand-lg navbar-light bg-black">
+        <nav ref={refMenu} className="navbar navbar-expand-lg bg-nav-black">
             <div className="container text-center">
                 <NavLink className="navbar-brand text-white" to="/"><img className="me-2" src={esfera} width="32px" alt="Esfera" />Dragon Ball API</NavLink>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,7 +57,7 @@ const Navbar = () => {
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
                         <li className="nav-item dropdown">
                             <button type='button' className="btn btn-dark dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                <FontAwesomeIcon icon={faUser} className="me-2"/>Usuario
+                                <FontAwesomeIcon icon={faUser} className="me-2"/>{data_user.nombre}
                             </button>
                             <ul className="dropdown-menu bg-black" aria-labelledby="navbarDropdown">
                                 <li><NavLink className="btn btn-dark w-100" to="/"><FontAwesomeIcon icon={faUserPen} className="me-2" />Editar cuenta</NavLink></li>

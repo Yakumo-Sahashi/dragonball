@@ -18,9 +18,9 @@ body::-webkit-scrollbar-thumb{
     border-radius: 5px;
 }
 
-.bg-black{
-    background-color: rgba(0,0,0,0.3);
-    border-bottom: 1px solid var(--primary);
+.bg-nav-black{
+    background-color: rgba(0,0,0,0.7);
+    border-bottom: 2px solid var(--primary);
     color: #fff;
 }
 
@@ -60,7 +60,7 @@ body::-webkit-scrollbar-thumb{
   	width: 100%;
   	top:0;
   	z-index: 1000;
-  	box-shadow: 0px 4px 3px rgba(0,0,0,0.2);
+  	box-shadow: 0px 4px 3px rgba(255, 119, 0, 0.4);
 }
 
 
@@ -156,5 +156,55 @@ body::-webkit-scrollbar-thumb{
 
     100% {
         transform: translate(-50%, -50%) rotate(-360deg)
+    }
+}
+
+.form-floating input{
+    background: none;
+    color: #fff;
+    border-radius: 6px;
+    border: none;
+    border-bottom: 2px solid var(--primary);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    &:focus{
+        background: rgb(0, 0, 0, 0.5);
+        color: #fff;
+        outline: none;
+        box-shadow: 0 0 8px 2px var(--primary);
+        border-color: var(--primary);
+    }
+    &:read-only{
+        background: rgb(0, 0, 0, 0.5);
+        color: #fff;
+    }
+    &:disabled {
+        background: rgb(0, 0, 0, 0.5);
+        color: #fff;
+        opacity: 1;
+    }
+}
+
+.form-floating select{
+    background: none;
+    color: #fff;
+    border-radius: 6px;
+    border: none;
+    border-bottom: 2px solid var(--primary);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    &:focus{
+        background: rgb(0, 0, 0, 0.5);
+        color: #fff;
+        outline: none;
+        box-shadow: 0 0 8px 2px var(--primary);
+        border-color: var(--primary);
+    }
+    &:read-only{
+        background: rgb(0, 0, 0, 0.5);
+        color: #fff;
+    }
+    &:disabled {
+        background: rgb(0, 0, 0, 0.5);
+        color: #fff;
+        opacity: 1;
     }
 }
