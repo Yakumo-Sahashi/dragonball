@@ -6,6 +6,7 @@ import { NavLink,useNavigate} from 'react-router-dom';
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import Contexto from '../context/Contexto.jsx';
+import Swal from "sweetalert2";
 
 const Login = () => {
   const {login} = useContext(Contexto);
@@ -23,16 +24,53 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    fetch("http://localhost:3001/login",{
+    fetch("http://localhost:3001/db/login",{
       method:"POST",
       headers: {"Content-Type":"application/json"},
       body:JSON.stringify({"usuario":data.usuario,"password":data.password})
     })
     .then((respuesta) => respuesta.json())
     .then((respuesta) =>{
-      iniciar_sesion(respuesta.usuario);      
+      if(respuesta.estatus == "Correcto"){
+        Swal.fire({
+          title: respuesta.estatus+"!",
+          text:"Iniciando sesion\nPor favor espera...",
+          timer: 2000,
+          timerProgressBar: true,
+          showConfirmButton: false,
+          customClass: {
+            popup: 'card-black'
+          }
+        }).then((result) => {
+          if (result.dismiss === Swal.DismissReason.timer) {
+            iniciar_sesion(respuesta.usuario);      
+          }
+        });
+      }else{
+        Swal.fire({
+          title: respuesta.estatus+"!",
+          text:respuesta.msj,
+          icon: "error",
+          draggable: true,
+          customClass: {
+            popup: 'card-black'
+          },
+          confirmButtonColor: "rgb(238, 135, 0,0.5)",
+          confirmButtonText: "Aceptar"
+        });
+      }
     }).catch((error) =>{
-      console.log("Se ha generado un error:",error);
+      Swal.fire({
+        title: "Se ha generado un error!",
+        text:error,
+        icon: "error",
+        draggable: true,
+        customClass: {
+          popup: 'card-black'
+        },
+        confirmButtonColor: "rgb(238, 135, 0,0.5)",
+        confirmButtonText: "Aceptar"
+      });
     });
   };
 

@@ -4,8 +4,11 @@ import { faPhoenixSquadron} from "@fortawesome/free-brands-svg-icons";
 import { useForm } from 'react-hook-form';
 import { useContext } from 'react';
 import Contexto from "../context/Contexto";
+import Swal from 'sweetalert2';
 
-const AgregarPersonaje = () => {
+const AgregarPersonaje = ({setCambio,cambio}) => {
+    const {usuario} = useContext(Contexto);
+    const data_user = typeof usuario != 'object' ? JSON.parse(usuario) : usuario;
     const validaciones = {
         nombre:{
             required: "El nombre es obligatorio",
@@ -30,17 +33,9 @@ const AgregarPersonaje = () => {
         },
         procedencia:{
             required: "El lugar de procedencia es obligatorio",
-            pattern: {
-                value: /^[a-zA-Z\s]+$/,
-                message: "El lugar de procedencia solo puede contener letras y espacios",
-            },
         },
         especie:{
             required: "La especie es obligatorio",
-            pattern: {
-                value: /^[a-zA-Z\s]+$/,
-                message: "La especie del personajes solo puede contener letras y espacios",
-            },
         },
         img:{
             required: "La URL de la imagen es obligatoria",
@@ -54,21 +49,36 @@ const AgregarPersonaje = () => {
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm();
-    const {usuario} = useContext(Contexto);
-    const data_user = JSON.parse(usuario);
     const onSubmit = (data) => {
-        fetch("http://localhost:3001/personaje/insercion",{
+        fetch("http://localhost:3001/db/personaje/insercion",{
             method:"POST",
-            headers: {"Content-Type":"application/json","Authorization":"Bearer "+data_user.token},
+            headers: {"Content-Type":"application/json","Autorizacion":"Bearer "+data_user.token},
             body:JSON.stringify(data)
         })
         .then((respuesta) => respuesta.json())
         .then((respuesta) =>{
-            console.log(respuesta)
+            reset();
+            setCambio(cambio + 1);
+            Swal.fire({
+                title: "Personaje creado con exito!",
+                text:respuesta.msj,
+                icon: "success",
+                draggable: true
+            });
         }).catch((error) =>{
-            console.log("Se ha generado un error:",error);
+            Swal.fire({
+                title: "Se ha generado un error!",
+                text:error,
+                icon: "error",
+                customClass: {
+                  popup: 'card-black'
+                },
+                confirmButtonColor: "rgb(238, 135, 0,0.5)",
+                confirmButtonText: "Aceptar"
+            });
         });
     }
     
@@ -102,13 +112,38 @@ const AgregarPersonaje = () => {
                             <div className="col-md-6">
                                 {errors.procedencia && <b className="text-danger mb-2"><FontAwesomeIcon icon={faTriangleExclamation} className="me-2"/>{errors.procedencia.message}</b> }
                                 <div className="form-floating mb-3">
-                                    <input {...register("procedencia",validaciones.procedencia)} type="text" className="form-control" placeholder="Procedencia"/>
-                                    <label htmlFor="procedencia" className="form-label text-warning"><FontAwesomeIcon icon={faSpinner} className="me-2" />Procedencia</label>
+                                    <select {...register("procedencia",validaciones.procedencia)} className="form-control">
+                                        <option value="">Seleccionar</option>
+                                        <option value="Tierra">Tierra</option>
+                                        <option value="Namek">Namek</option>
+                                        <option value="Nuevo Namek">Nuevo Namek</option>
+                                        <option value="Vegeta">Vegeta</option>
+                                        <option value="Vampa">Vampa</option>
+                                        <option value="Yardrat">Yardrat</option>
+                                        <option value="Kaioshin Kai">Kaioshin Kai</option>
+                                        <option value="Kaio del Norte (Kaio-sama)">Kaio del Norte (Kaio-sama)</option>
+                                        <option value="Kaio del Sur, Este y Oeste">Kaio del Sur, Este y Oeste</option>
+                                        <option value="Bills">Bills</option>
+                                    </select>
+                                    <label htmlFor="procedencia" className="form-label text-warning"><FontAwesomeIcon icon={faEarthAmericas} className="me-2" />Procedencia</label>
                                 </div>  
                                 {errors.especie && <b className="text-danger mb-2"><FontAwesomeIcon icon={faTriangleExclamation} className="me-2"/>{errors.especie.message}</b> }                          
                                 <div className="form-floating mb-3">
-                                    <input {...register("especie",validaciones.especie)} type="text" className="form-control" placeholder="Especie"/>
-                                    <label htmlFor="especie" className="form-label text-warning"><FontAwesomeIcon icon={faEarthAmericas} className="me-2" />Especie</label>
+                                    <select {...register("especie",validaciones.especie)} className="form-control">
+                                        <option value="">Selecionar</option>
+                                        <option value="Humana">Humana</option>
+                                        <option value="Sayajin">Sayajin</option>
+                                        <option value="Androide">Androide</option>
+                                        <option value="Demonio del Frio">Demonio del Frio</option>
+                                        <option value="Namekiano">Namekiano</option>
+                                        <option value="Dragon">Dragon</option>
+                                        <option value="Namekiano">Namekiano</option>
+                                        <option value="Kaio">Kaio</option>
+                                        <option value="Demonio">Demonio</option>
+                                        <option value="Tsufuru">Tsufuru</option>
+                                        <option value="Majin">Majin</option>
+                                    </select>
+                                    <label htmlFor="especie" className="form-label text-warning"><FontAwesomeIcon icon={faSpinner} className="me-2" />Especie</label>
                                 </div> 
                                 {errors.img && <b className="text-danger mb-2"><FontAwesomeIcon icon={faTriangleExclamation} className="me-2"/>{errors.img.message}</b> }                           
                                 <div className="form-floating mb-3">
