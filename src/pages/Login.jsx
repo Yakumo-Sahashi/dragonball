@@ -31,11 +31,12 @@ const Login = () => {
     })
     .then((respuesta) => respuesta.json())
     .then((respuesta) =>{
-      if(respuesta.estatus == "Correcto"){
+      if(respuesta.estatus === "Correcto"){
         Swal.fire({
           title: respuesta.estatus+"!",
           text:"Iniciando sesion\nPor favor espera...",
           timer: 2000,
+          icon:"success",
           timerProgressBar: true,
           showConfirmButton: false,
           customClass: {

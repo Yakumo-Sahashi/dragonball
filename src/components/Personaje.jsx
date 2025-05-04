@@ -6,7 +6,7 @@ import { useContext } from "react";
 import Contexto from "../context/Contexto";
 import Swal from 'sweetalert2';
 
-const Personaje = ({setCambio,cambio,id,url,nombre,procedencia,nombre_alterno,nacimiento,especie}) => {
+const Personaje = ({setPersonajePrev,setCambio,cambio,id,url,nombre,procedencia,nombre_alterno,nacimiento,especie,btn}) => {
   const {usuario} = useContext(Contexto);
   const data_user = typeof usuario != 'object' ? JSON.parse(usuario) : usuario;
 
@@ -33,7 +33,7 @@ const Personaje = ({setCambio,cambio,id,url,nombre,procedencia,nombre_alterno,na
           Swal.fire({
             title: respuesta.estatus+"!",
             text:respuesta.msj,
-            icon: respuesta.estatus == "Correcto" ? "success" : "error",
+            icon: respuesta.estatus === "Correcto" ? "success" : "error",
             draggable: true,
             customClass: {
               popup: 'card-black'
@@ -73,7 +73,9 @@ const Personaje = ({setCambio,cambio,id,url,nombre,procedencia,nombre_alterno,na
               <p className='lead'><FontAwesomeIcon icon={faSpinner} className="me-2" />Especie: <span className="badge bg-danger">{especie}</span></p>
               <p className='lead'><FontAwesomeIcon icon={faEarthAmericas} className="me-2" />Origen: <span className="badge bg-success">Planeta {procedencia}</span></p>
               <div className="text-end">
-                <button className='btn btn-outline-primary mx-1 btn-sm rounded-circle'><FontAwesomeIcon icon={faPenToSquare}/></button>
+                <button onClick={() => setPersonajePrev(id)} type="button" className="btn btn-outline-primary mx-1 btn-sm rounded-circle" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+                  <FontAwesomeIcon icon={faPenToSquare}/>
+                </button>
                 <button onClick={eliminar} className='btn btn-outline-danger mx-1 btn-sm rounded-circle'><FontAwesomeIcon icon={faTrashCan}/></button>
               </div>
             </div>

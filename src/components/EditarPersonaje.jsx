@@ -2,12 +2,12 @@ import {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
 import { faTriangleExclamation,faSignature, faCalendarCheck, faSpinner, faEarthAmericas,faImage, faDragon, faFloppyDisk, faBan} from "@fortawesome/free-solid-svg-icons";
 import { faPhoenixSquadron} from "@fortawesome/free-brands-svg-icons";
 import { useForm } from 'react-hook-form';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import Contexto from "../context/Contexto";
 import Swal from 'sweetalert2';
-import validaciones_personaje from '../context/validaciones_personaje';
+import validaciones_personaje from '../context/validaciones_personaje.js';
 
-const AgregarPersonaje = ({setCambio,cambio}) => {
+const EditarPersonaje = ({previo,setCambio,cambio}) => {
     const {usuario} = useContext(Contexto);
     const data_user = typeof usuario != 'object' ? JSON.parse(usuario) : usuario;
     const validaciones = validaciones_personaje;
@@ -18,8 +18,8 @@ const AgregarPersonaje = ({setCambio,cambio}) => {
         formState: { errors },
     } = useForm();
     const onSubmit = (data) => {
-        fetch("http://localhost:3001/db/personaje/insercion",{
-            method:"POST",
+        fetch(`http://localhost:3001/db/personaje/actualizar/${previo._id ?? ""}`,{
+            method:"PUT",
             headers: {"Content-Type":"application/json","Autorizacion":"Bearer "+data_user.token},
             body:JSON.stringify(data)
         })
@@ -28,7 +28,7 @@ const AgregarPersonaje = ({setCambio,cambio}) => {
             reset();
             setCambio(cambio + 1);
             Swal.fire({
-                title: "Personaje creado con exito!",
+                title: "Personaje actualizado con exito!",
                 text:respuesta.msj,
                 icon: "success",
                 customClass: {
@@ -50,9 +50,15 @@ const AgregarPersonaje = ({setCambio,cambio}) => {
             });
         });
     }
+
+    useEffect(()=>{
+        if (previo) {
+            reset(previo); // <- esto llena el formulario correctamente
+        }        
+    },[previo]);
     
     return (
-        <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style={{"background":"rgba(16, 30, 35, 0.7)"}}>
+        <div className="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style={{"background":"rgba(16, 30, 35, 0.7)"}}>
             <div className="modal-dialog modal-dialog-centered modal-lg">
                 <form onSubmit={handleSubmit(onSubmit)} className="modal-content card-black">
                     <div className="modal-header">
@@ -60,7 +66,7 @@ const AgregarPersonaje = ({setCambio,cambio}) => {
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
-                        <div className="row">
+                        <div className="row justify-content-center">
                             <div className="col-md-6">
                                 {errors.nombre && <b className="text-danger mb-2"><FontAwesomeIcon icon={faTriangleExclamation} className="me-2"/>{errors.nombre.message}</b> }
                                 <div className="form-floating mb-3">
@@ -82,10 +88,9 @@ const AgregarPersonaje = ({setCambio,cambio}) => {
                                 {errors.procedencia && <b className="text-danger mb-2"><FontAwesomeIcon icon={faTriangleExclamation} className="me-2"/>{errors.procedencia.message}</b> }
                                 <div className="form-floating mb-3">
                                     <select {...register("procedencia",validaciones.procedencia)} className="form-control">
-                                        <option value="">Seleccionar</option>
                                         <option value="Tierra">Tierra</option>
-                                        <option value="Cold">Cold</option>
                                         <option value="Namek">Namek</option>
+                                        <option value="Cold">Cold</option>
                                         <option value="Nuevo Namek">Nuevo Namek</option>
                                         <option value="Vegeta">Vegeta</option>
                                         <option value="Vampa">Vampa</option>
@@ -120,11 +125,14 @@ const AgregarPersonaje = ({setCambio,cambio}) => {
                                     <label htmlFor="img" className="form-label text-warning"><FontAwesomeIcon icon={faImage} className="me-2" />URL Imagen</label>
                                 </div>                            
                             </div>
+                            <div className="col-md-3 align-self-center">
+                                <img src={previo.img} className='mx-auto d-block img-fluid' alt="Previo" />
+                            </div>
                         </div>
                     </div>
                     <div className="modal-footer">
                         <button onClick={() => reset()} type="button" className="btn btn-outline-danger" data-bs-dismiss="modal"><FontAwesomeIcon icon={faBan} className="me-2" />Cancelar</button>
-                        <button type="submit" className="btn btn-outline-warning"><FontAwesomeIcon icon={faFloppyDisk} className="me-2" />Añadir</button>
+                        <button type="submit" className="btn btn-outline-warning"><FontAwesomeIcon icon={faFloppyDisk} className="me-2" />Actualizar</button>
                     </div>
                 </form>
             </div>
@@ -132,4 +140,4 @@ const AgregarPersonaje = ({setCambio,cambio}) => {
     )
 }
 
-export default AgregarPersonaje
+export default EditarPersonaje

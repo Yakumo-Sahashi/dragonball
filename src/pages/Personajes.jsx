@@ -1,16 +1,24 @@
 import { useEffect, useRef, useState } from "react";
 import Personaje from "../components/Personaje.jsx";
 import AgregarPersonaje from "../components/AgregarPersonaje.jsx";
+import EditarPersonaje from "../components/EditarPersonaje.jsx";
 import {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
-import { faHornbill, faSuperpowers} from "@fortawesome/free-brands-svg-icons";
+import { faHornbill} from "@fortawesome/free-brands-svg-icons";
 import { faPlus,faMagnifyingGlass, faEarthAmericas} from "@fortawesome/free-solid-svg-icons";
+import { useContext } from "react";
+import Contexto from "../context/Contexto";
 
 const Personajes = () => {
+  const {usuario} = useContext(Contexto);
+  const data_user = typeof usuario != 'object' ? JSON.parse(usuario) : usuario;
   const [newBusqueda,setNewBusqueda] = useState("");
   const [personajes,setPersonajes] = useState([]);
   const [orden,setOrden] = useState("a-z");
   const [cambio,setCambio] = useState(0);
+  const [personajePrev,setPersonajePrev] = useState("");
+  const [previo,setPrevio] = useState([]);
   const refOrden = useRef();
+
   useEffect(() =>{
     fetch("http://localhost:3001/db/personajes")
     .then((respuesta) => respuesta.json())
@@ -51,6 +59,21 @@ const Personajes = () => {
     });
   },[newBusqueda]);
 
+  useEffect(() =>{
+    if(personajePrev !== ""){
+      fetch(`http://localhost:3001/db/personaje/${personajePrev}`,{
+        headers: {"Content-Type":"application/json","Autorizacion":"Bearer "+data_user.token}
+      })
+      .then((respuesta) => respuesta.json())
+      .then((respuesta) =>{
+        setPrevio(respuesta)
+      }).catch((error) =>{
+        console.log("Se ha generado un error:",error);
+      });
+      setPersonajePrev("");
+    }
+  },[personajePrev]);
+
   return (
     <div className="container">
       <div className="row justify-content-center py-4 text-white">
@@ -79,22 +102,18 @@ const Personajes = () => {
                 <FontAwesomeIcon icon={faPlus} className="me-2" />Añadir
               </button>
             </div>
-            <div className="col-md-5">
-              <button type="button" className="btn btn-outline-warning mb-3 w-100" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                <FontAwesomeIcon icon={faPlus} className="me-2" />Reiniciar
-              </button>
-            </div>
           </div>
         </div>
         {
           personajes.map((personaje) => {
             return <div key={personaje._id} className="col-md-6 mb-3">
-              <Personaje setCambio={setCambio} cambio={cambio} id={personaje._id} url={personaje.img} nombre={personaje.nombre} nombre_alterno={personaje.nombre_alterno} nacimiento={personaje.nacimiento} especie={personaje.especie} procedencia={personaje.procedencia}/>
+              <Personaje setPersonajePrev={setPersonajePrev} setCambio={setCambio} cambio={cambio} id={personaje._id} url={personaje.img} nombre={personaje.nombre} nombre_alterno={personaje.nombre_alterno} nacimiento={personaje.nacimiento} especie={personaje.especie} procedencia={personaje.procedencia}/>
             </div> ;
           })
         }
       </div>
       <AgregarPersonaje setCambio={setCambio} cambio={cambio}/>
+      <EditarPersonaje setPrevio={setPrevio} previo={previo} setCambio={setCambio} cambio={cambio}/>
     </div>
   )
 }
