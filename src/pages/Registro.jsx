@@ -1,6 +1,6 @@
 import "../assets/styles/Login.css";
 import {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
-import { faHornbill} from "@fortawesome/free-brands-svg-icons";
+import { faHornbill,faDAndD} from "@fortawesome/free-brands-svg-icons";
 import { faUser,faKey} from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from 'react-router-dom'
 
@@ -9,12 +9,17 @@ const Registro = () => {
     <div className="container">
       <div className="row justify-content-center py-5 text-white login">		
         <div className="d-none d-md-block col-md-4 bg-registro-a" data-aos="fade-down" data-aos-duration="3000">
+          <div className="row justify-content-center fon-lg">
+            <div className="col align-self-center text-center">
+              <p className="display-4 text-white"><b>DRAGON BALL API</b> <FontAwesomeIcon icon={faDAndD}/></p>
+            </div>
+          </div>
         </div>
         <div className="col-md-4 bg-login-b" data-aos="fade-up" data-aos-duration="3000">
-          <form id="frm_login" className="row justify-content-center h-100 py-4">
+          <form className="row justify-content-center h-100 py-4">
             <div className="col-11 align-self-center">
               <FontAwesomeIcon icon={faHornbill} className="mx-auto d-block display-3 text-warning" />
-              <h4 className="mb-5 text-center">Registro</h4>
+              <h2 className="mb-5 text-center">Registro</h2>
               <div className="form-floating mb-3 ">
                 <input type="text" className="form-control" placeholder="Usuario"/>
                 <label htmlFor="usuario" className="form-label text-warning"><FontAwesomeIcon icon={faUser} className="me-2"/>Usuario</label>

@@ -19,7 +19,7 @@ body::-webkit-scrollbar-thumb{
 }
 
 .bg-nav-black{
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0,0,0,0.6);
     border-bottom: 2px solid var(--primary);
     color: #fff;
 }
