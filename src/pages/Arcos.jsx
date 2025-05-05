@@ -1,6 +1,6 @@
 import {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
 import { faBattleNet} from "@fortawesome/free-brands-svg-icons";
-import { faPlus,faMagnifyingGlass, faEarthAmericas} from "@fortawesome/free-solid-svg-icons";
+import { faPlus,faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from 'react';
 import Arco from '../components/Arco';
 

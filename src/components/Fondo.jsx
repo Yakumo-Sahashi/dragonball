@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 
 const Fondo = ({children}) => {
     const location = useLocation();
@@ -16,9 +16,9 @@ const Fondo = ({children}) => {
         if(location.pathname in fondos){
             document.body.style.backgroundImage = fondos[location.pathname];
         }else{
-            document.body.style.backgroundImage = "url('/images/bg01.jpg')";
+            document.body.style.backgroundImage = "url('/images/bg01.webp')";
         }
-    }, [location]);
+    },[location]);
   
     return (
         <>

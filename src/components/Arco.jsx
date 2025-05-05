@@ -1,6 +1,6 @@
 import {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
 import { faPenToSquare,faTrashCan, faToriiGate, faChartBar, faChartDiagram, faListOl} from "@fortawesome/free-solid-svg-icons";
-import { faPhoenixSquadron, faSuperpowers} from "@fortawesome/free-brands-svg-icons";
+import { faSuperpowers} from "@fortawesome/free-brands-svg-icons";
 
 const Arco = ({id,saga,descripcion,episodios,antagonistas,img}) => {
     return (

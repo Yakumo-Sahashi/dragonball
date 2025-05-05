@@ -2,7 +2,7 @@
 	--primary: #ee8700;
 }
 .bg-login-a{
-    background: url('../img/login2.jpg'); 
+    background: url('../img/login2.webp'); 
     height: 85vh; 
     background-position: center;
 	background-size: cover;
@@ -13,7 +13,7 @@
 }
 
 .bg-registro-a{
-    background: url('../img/login.jpg'); 
+    background: url('../img/login.webp'); 
     height: 85vh; 
     background-position: center;
 	background-size: cover;
