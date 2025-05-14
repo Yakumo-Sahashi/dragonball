@@ -72,12 +72,12 @@ const Personaje = ({setPersonajePrev,setCambio,cambio,id,url,nombre,procedencia,
               <p className='lead'><FontAwesomeIcon icon={faCalendarCheck} className="me-2" />Nacimiento: <span className="badge bg-warning">{nacimiento}</span></p>
               <p className='lead'><FontAwesomeIcon icon={faSpinner} className="me-2" />Especie: <span className="badge bg-danger">{especie}</span></p>
               <p className='lead'><FontAwesomeIcon icon={faEarthAmericas} className="me-2" />Origen: <span className="badge bg-success">Planeta {procedencia}</span></p>
-              <div className="text-end">
+              {(data_user.rol === 1 && <div className="text-end">
                 <button onClick={() => setPersonajePrev(id)} type="button" className="btn btn-outline-primary mx-1 btn-sm rounded-circle" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
                   <FontAwesomeIcon icon={faPenToSquare}/>
                 </button>
                 <button onClick={eliminar} className='btn btn-outline-danger mx-1 btn-sm rounded-circle'><FontAwesomeIcon icon={faTrashCan}/></button>
-              </div>
+              </div>)}
             </div>
           </div>
         </div>    

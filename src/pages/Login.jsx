@@ -3,64 +3,35 @@ import {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
 import { faHornbill,faDAndD} from "@fortawesome/free-brands-svg-icons";
 import { faUser,faKey, faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
 import { NavLink,useNavigate} from 'react-router-dom';
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Contexto from '../context/Contexto.jsx';
 import Swal from "sweetalert2";
+import { useLoader } from "../hooks/useLoader.jsx";
+import useApi from "../hooks/useApi.jsx";
 
 const Login = () => {
-  const {login} = useContext(Contexto);
   const navegacion = useNavigate();
+  const {login} = useContext(Contexto);
+  const {conCarga} = useLoader();
+  const { register,handleSubmit,formState: { errors }} = useForm();
+  const { respuesta, error, request } = useApi();
 
-  const iniciar_sesion = (data={}) =>{
-    login(data);
-    navegacion("/inicio",{replace:true});
+  const validaciones = {
+    usuario: {
+      required: "El nombre de usuario es obligatorio",
+      pattern: {
+        value: /^[a-zA-Z0-9]+$/,
+        message: "El nombre de usuario solo puede contener letras y numeros",
+      },
+    },
+    password:{
+      required: "La contraseña es obligatoria"
+    }
   }
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const onSubmit = (data) => {
-    fetch("http://localhost:3001/db/login",{
-      method:"POST",
-      headers: {"Content-Type":"application/json"},
-      body:JSON.stringify({"usuario":data.usuario,"password":data.password})
-    })
-    .then((respuesta) => respuesta.json())
-    .then((respuesta) =>{
-      if(respuesta.estatus === "Correcto"){
-        Swal.fire({
-          title: respuesta.estatus+"!",
-          text:"Iniciando sesion\nPor favor espera...",
-          timer: 2000,
-          icon:"success",
-          timerProgressBar: true,
-          showConfirmButton: false,
-          customClass: {
-            popup: 'card-black'
-          }
-        }).then((result) => {
-          if (result.dismiss === Swal.DismissReason.timer) {
-            iniciar_sesion(respuesta.usuario);      
-          }
-        });
-      }else{
-        Swal.fire({
-          title: respuesta.estatus+"!",
-          text:respuesta.msj,
-          icon: "error",
-          draggable: true,
-          customClass: {
-            popup: 'card-black'
-          },
-          confirmButtonColor: "rgb(238, 135, 0,0.5)",
-          confirmButtonText: "Aceptar"
-        });
-      }
-    }).catch((error) =>{
+  useEffect(()=>{
+    if(error){
       Swal.fire({
         title: "Se ha generado un error!",
         text:error,
@@ -72,9 +43,40 @@ const Login = () => {
         confirmButtonColor: "rgb(238, 135, 0,0.5)",
         confirmButtonText: "Aceptar"
       });
-    });
-  };
+    }
+  },[error]);
 
+  useEffect(() =>{ 
+    if(respuesta){
+      Swal.fire({
+        title: respuesta.estatus+"!",
+        text: "Iniciando sesion\nPor favor espera...",
+        timer: 2000,
+        icon:"success",
+        timerProgressBar: true,
+        showConfirmButton: false,
+        customClass: {
+          popup: 'card-black'
+        }
+      }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.timer) {
+          login(respuesta.usuario);
+          navegacion("/inicio",{replace:true});  
+        }
+      }); 
+    }
+  },[respuesta]);
+
+  const onSubmit = (data) => {
+    conCarga(async () =>{
+      await request({
+        url:"http://localhost:3001/db/login",
+        method:"POST",
+        body:{"usuario":data.usuario,"password":data.password}
+      })
+    })  
+  };
+  
   return (
     <>
       <div className="container">
@@ -93,22 +95,14 @@ const Login = () => {
                 <h2 className="mb-5 text-center">Inicia sesion</h2>
                 {errors.usuario && <b className="text-danger mb-2"><FontAwesomeIcon icon={faTriangleExclamation} className="me-2"/>{errors.usuario.message}</b> }
                 <div className="form-floating mb-3 ">
-                  <input {...register("usuario", {
-                    required: "El nombre de usuario es obligatorio",
-                    pattern: {
-                      value: /^[a-zA-Z0-9]+$/,
-                      message: "El nombre de usuario solo puede contener letras y numeros",
-                    },
-                  })} 
+                  <input {...register("usuario",validaciones.usuario)}
                   type="text" className="form-control" placeholder="Usuario"
                   />
                   <label htmlFor="usuario" className="form-label text-warning"><FontAwesomeIcon icon={faUser} className="me-2"/>Usuario</label>
                 </div>
                 {errors.password && <b className="text-danger mb-2"><FontAwesomeIcon icon={faTriangleExclamation} className="me-2"/>{errors.password.message}</b> }
                 <div className="form-floating mb-3">
-                  <input {...register("password", {
-                    required: "La contraseña es obligatoria"
-                  })} 
+                  <input {...register("password",validaciones.password)} 
                    type="password" className="form-control" placeholder="Contraseña"/>
                   <label htmlFor="password" className="form-label text-warning"><FontAwesomeIcon icon={faKey} className="me-2"/>Contraseña</label>
                 </div>

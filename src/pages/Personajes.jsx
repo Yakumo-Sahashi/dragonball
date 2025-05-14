@@ -97,11 +97,11 @@ const Personajes = () => {
                   <label htmlFor="buscar" className="form-label text-warning"><FontAwesomeIcon icon={faMagnifyingGlass} className="me-2" />Buscar</label>
               </div>
             </div>
-            <div className="col-md-5">
+            {(data_user.rol === 1 && <div className="col-md-5">
               <button type="button" className="btn btn-outline-warning mb-3 w-100" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 <FontAwesomeIcon icon={faPlus} className="me-2" />Añadir
               </button>
-            </div>
+            </div>)}
           </div>
         </div>
         {
@@ -112,8 +112,12 @@ const Personajes = () => {
           })
         }
       </div>
-      <AgregarPersonaje setCambio={setCambio} cambio={cambio}/>
-      <EditarPersonaje setPrevio={setPrevio} previo={previo} setCambio={setCambio} cambio={cambio}/>
+      {(data_user.rol === 1 &&
+        <>
+          <AgregarPersonaje setCambio={setCambio} cambio={cambio}/>
+          <EditarPersonaje setPrevio={setPrevio} previo={previo} setCambio={setCambio} cambio={cambio}/>
+        </>
+      )}
     </div>
   )
 }

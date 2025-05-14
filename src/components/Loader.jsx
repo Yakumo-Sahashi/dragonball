@@ -1,31 +1,18 @@
-import { useRef,useEffect } from "react";
+import {useLoader} from "../hooks/useLoader.jsx";
 import esfera from "../assets/img/favicon.png";
 
 const Loader = () => {
-    const refLoader = useRef();
-    useEffect(() => {
-      const handleLoad = () => {
-        if (refLoader.current) {
-          refLoader.current.style.visibility = 'hidden';
-          refLoader.current.style.opacity = '0';
-        }
-      };
-  
-      window.addEventListener('load', handleLoad);
-      return () => {
-        window.removeEventListener('load', handleLoad);
-      };
-    }, []);
+  const {cargando} = useLoader();
 
-    return (
-      <div ref={refLoader} className="contenedor">
-        <div className="loader-container">
-          <div className="loader"></div>
-          <div className="loader2"></div>
-          <img className="img-load" src={esfera} alt="Loader..."/>
-        </div>
+  return cargando ? (
+    <div className="contenedor">
+      <div className="loader-container">
+        <div className="loader"></div>
+        <div className="loader2"></div>
+        <img className="img-load" src={esfera} alt="Loader..."/>
       </div>
-    )
+    </div>
+  ) : null;
 }
 
 export default Loader;

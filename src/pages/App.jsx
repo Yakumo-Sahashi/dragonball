@@ -11,16 +11,25 @@ import RutasPrivadas from "../routes/RutasPrivadas.jsx";
 import RutasPublicas from "../routes/RutasPublicas.jsx";
 import AOS from 'aos';
 import "aos/dist/aos.css";
-import { useEffect } from "react";
+import { useEffect} from "react";
+import {useLoader} from "../hooks/useLoader.jsx";
 import Loader from "../components/Loader.jsx";
 import Fondo from "../components/Fondo.jsx";
 
 const App = () => {
+    const {iniciarCarga,detenerCarga} = useLoader();
     useEffect(() => {
+        iniciarCarga();
         AOS.init({
             duration: 1000,
             once: true, 
         });
+        if (document.readyState === 'complete') {
+            detenerCarga();
+        } else {
+            window.addEventListener('load', detenerCarga);
+        }
+        return () => window.removeEventListener('load', detenerCarga);
     }, []);
     return (
         <BrowserRouter>
