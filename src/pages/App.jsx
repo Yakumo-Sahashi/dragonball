@@ -15,6 +15,7 @@ import { useEffect} from "react";
 import {useLoader} from "../hooks/useLoader.jsx";
 import Loader from "../components/Loader.jsx";
 import Fondo from "../components/Fondo.jsx";
+import Imagenes from "./Imagenes.jsx";
 
 const App = () => {
     const {iniciarCarga,detenerCarga} = useLoader();
@@ -43,6 +44,7 @@ const App = () => {
                     <Route path="/temas" element={<RutasPrivadas><Temas/></RutasPrivadas>}/>
                     <Route path="/login" element={<RutasPublicas><Login/></RutasPublicas>}/>
                     <Route path="/registro" element={<RutasPublicas><Registro/></RutasPublicas>}/>
+                    <Route path="/imagenes" element={<RutasPrivadas><Imagenes/></RutasPrivadas>}/>
                     <Route path="*" element={<Error/>}/>
                 </Routes>
             </Fondo>

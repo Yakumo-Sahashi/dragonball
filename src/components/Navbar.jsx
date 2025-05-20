@@ -53,6 +53,9 @@ const Navbar = () => {
                         <li className="nav-item">
                             <NavLink className="btn btn-dark" to="/temas">Temas</NavLink>
                         </li>
+                        <li className="nav-item">
+                            <NavLink className="btn btn-dark" to="/imagenes">Imagenes</NavLink>
+                        </li>
                     </ul>
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
                         <li className="nav-item dropdown">
