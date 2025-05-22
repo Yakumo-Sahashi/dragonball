@@ -11,6 +11,7 @@ import { useLoader } from "../hooks/useLoader.jsx";
 import useApi from "../hooks/useApi.jsx";
 
 const Login = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const navegacion = useNavigate();
   const {login} = useContext(Contexto);
   const {conCarga} = useLoader();
@@ -70,7 +71,7 @@ const Login = () => {
   const onSubmit = (data) => {
     conCarga(async () =>{
       await request({
-        url:"http://localhost:3001/db/login",
+        url:`${API_URL}/login`,
         method:"POST",
         body:{"usuario":data.usuario,"password":data.password}
       })

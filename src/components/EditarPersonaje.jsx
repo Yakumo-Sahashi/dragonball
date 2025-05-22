@@ -11,6 +11,7 @@ const EditarPersonaje = ({previo,setCambio,cambio}) => {
     const {usuario} = useContext(Contexto);
     const data_user = typeof usuario != 'object' ? JSON.parse(usuario) : usuario;
     const validaciones = validaciones_personaje;
+    const API_URL = process.env.REACT_APP_API_URL;
     const {
         register,
         handleSubmit,
@@ -18,7 +19,7 @@ const EditarPersonaje = ({previo,setCambio,cambio}) => {
         formState: { errors },
     } = useForm();
     const onSubmit = (data) => {
-        fetch(`http://localhost:3001/db/personaje/actualizar/${previo._id ?? ""}`,{
+        fetch(`${API_URL}/personaje/actualizar/${previo._id ?? ""}`,{
             method:"PUT",
             headers: {"Content-Type":"application/json","Autorizacion":"Bearer "+data_user.token},
             body:JSON.stringify(data)

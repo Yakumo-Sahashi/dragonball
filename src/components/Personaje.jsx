@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 const Personaje = ({setPersonajePrev,setCambio,cambio,id,url,nombre,procedencia,nombre_alterno,nacimiento,especie,btn}) => {
   const {usuario} = useContext(Contexto);
   const data_user = typeof usuario != 'object' ? JSON.parse(usuario) : usuario;
+  const API_URL = process.env.REACT_APP_API_URL;
 
   const eliminar = () => {
     Swal.fire({
@@ -24,7 +25,7 @@ const Personaje = ({setPersonajePrev,setCambio,cambio,id,url,nombre,procedencia,
       confirmButtonText: "Eliminar"
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch("http://localhost:3001/db/personaje/del/"+id,{
+        fetch(`${API_URL}/personaje/del/`+id,{
           method:"DELETE",
           headers: {"Content-Type":"application/json","Autorizacion":"Bearer "+data_user.token},
         })

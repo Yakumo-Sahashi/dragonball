@@ -5,9 +5,10 @@ import { useEffect, useState } from 'react';
 import Arco from '../components/Arco';
 
 const Arcos = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const [arcos, setArcos] = useState([]);
   useEffect(() =>{
-    fetch("http://localhost:3001/db/arcos")
+    fetch(`${API_URL}/arcos`)
     .then((respuesta) => respuesta.json())
     .then((respuesta) =>{
       setArcos(respuesta)

@@ -11,6 +11,7 @@ import useApi from "../hooks/useApi";
 import Swal from "sweetalert2";
 
 const Registro = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const navegacion = useNavigate();
   const {login} = useContext(Contexto);
   const {conCarga} = useLoader();
@@ -70,7 +71,7 @@ const Registro = () => {
   const onSubmit = (data) => {
     conCarga(async () =>{
       await request({
-        url:"http://localhost:3001/db/registro",
+        url:`${API_URL}/registro`,
         method:"POST",
         body:{"usuario":data.usuario,"password":data.password}
       })

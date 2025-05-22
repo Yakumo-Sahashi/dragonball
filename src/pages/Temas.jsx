@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 
 const Temas = () => {
   const [contenido,setContenido] = useState([]);
-
+  const API_URL = process.env.REACT_APP_API_URL;
   useEffect(()=>{
-    fetch("http://localhost:3001/db/personajes")
+    fetch(`${API_URL}/personajes`)
     .then((respuesta) => respuesta.json())
     .then((respuesta) => {
       setContenido(respuesta);

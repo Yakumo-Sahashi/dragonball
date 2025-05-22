@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import validaciones_personaje from '../context/validaciones_personaje';
 
 const AgregarPersonaje = ({setCambio,cambio}) => {
+    const API_URL = process.env.REACT_APP_API_URL;
     const {usuario} = useContext(Contexto);
     const data_user = typeof usuario != 'object' ? JSON.parse(usuario) : usuario;
     const validaciones = validaciones_personaje;
@@ -18,7 +19,7 @@ const AgregarPersonaje = ({setCambio,cambio}) => {
         formState: { errors },
     } = useForm();
     const onSubmit = (data) => {
-        fetch("http://localhost:3001/db/personaje/insercion",{
+        fetch(`${API_URL}/personaje/insercion`,{
             method:"POST",
             headers: {"Content-Type":"application/json","Autorizacion":"Bearer "+data_user.token},
             body:JSON.stringify(data)

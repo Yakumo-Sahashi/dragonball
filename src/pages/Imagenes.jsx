@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import Contexto from "../context/Contexto";
 
 const Imagenes = () => {
+    const API_URL = process.env.REACT_APP_API_URL;
     const {usuario} = useContext(Contexto);
     const data_user = typeof usuario != 'object' ? JSON.parse(usuario) : usuario;
     const [imagenes,setImagenes] = useState({imagenes:[]});
@@ -25,7 +26,7 @@ const Imagenes = () => {
   
     useEffect(() =>{
         request({
-            url:"http://localhost:3001/db/imagen",
+            url:`${API_URL}/imagen`,
             method:"GET",
         })
     },[actualizar]);
@@ -74,7 +75,7 @@ const Imagenes = () => {
             if (result.isConfirmed) {
                 iniciarCarga();
                 request({
-                    url:"http://localhost:3001/db/imagen/"+id,
+                    url:`${API_URL}/imagen/`+id,
                     method:"DELETE",
                     headers: {"Autorizacion":"Bearer "+data_user.token}
                 })
@@ -95,7 +96,7 @@ const Imagenes = () => {
         for (let i = 0; i < data.image.length; i++) {
             formData.append('image', data.image[i]);
         }
-        fetch("http://localhost:3001/db/imagenes",{
+        fetch(`${API_URL}/imagenes`,{
             method:"POST",
             headers: {"Autorizacion":"Bearer "+data_user.token},
             body:formData

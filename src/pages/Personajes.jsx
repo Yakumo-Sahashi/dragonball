@@ -9,6 +9,7 @@ import { useContext } from "react";
 import Contexto from "../context/Contexto";
 
 const Personajes = () => {
+  const API_URL = process.env.REACT_APP_API_URL;
   const {usuario} = useContext(Contexto);
   const data_user = typeof usuario != 'object' ? JSON.parse(usuario) : usuario;
   const [newBusqueda,setNewBusqueda] = useState("");
@@ -20,7 +21,7 @@ const Personajes = () => {
   const refOrden = useRef();
 
   useEffect(() =>{
-    fetch("http://localhost:3001/db/personajes")
+    fetch(`${API_URL}/personajes`)
     .then((respuesta) => respuesta.json())
     .then((respuesta) =>{
       setPersonajes(respuesta)
@@ -30,7 +31,7 @@ const Personajes = () => {
   },[]);
 
   useEffect(() =>{
-    fetch("http://localhost:3001/db/personajes")
+    fetch(`${API_URL}/personajes`)
     .then((respuesta) => respuesta.json())
     .then((respuesta) =>{
       setPersonajes(respuesta)
@@ -50,7 +51,7 @@ const Personajes = () => {
 
   useEffect(() =>{
     refOrden.current.value="";
-    fetch(`http://localhost:3001/db/personaje/b/${newBusqueda}`)
+    fetch(`${API_URL}/personaje/b/${newBusqueda}`)
     .then((respuesta) => respuesta.json())
     .then((respuesta) =>{
       setPersonajes(respuesta)
@@ -61,7 +62,7 @@ const Personajes = () => {
 
   useEffect(() =>{
     if(personajePrev !== ""){
-      fetch(`http://localhost:3001/db/personaje/${personajePrev}`,{
+      fetch(`${API_URL}/personaje/${personajePrev}`,{
         headers: {"Content-Type":"application/json","Autorizacion":"Bearer "+data_user.token}
       })
       .then((respuesta) => respuesta.json())
