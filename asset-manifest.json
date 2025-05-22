@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/dragonball/static/css/main.e7143ad2.css",
+    "main.js": "/dragonball/static/js/main.bc49bd76.js",
+    "static/media/bg02.jpg": "/dragonball/static/media/bg02.1128f864aec28448b78c.jpg",
+    "static/media/bg01.jpg": "/dragonball/static/media/bg01.ea2e348cdf63ab4d7c4d.jpg",
+    "static/media/personajes.jpg": "/dragonball/static/media/personajes.fa5dc60091ea2fa6e461.jpg",
+    "static/media/login.webp": "/dragonball/static/media/login.992ca50d32c87a63ce7c.webp",
+    "static/media/login2.webp": "/dragonball/static/media/login2.efa4745627130ac4dcfd.webp",
+    "static/media/favicon.png": "/dragonball/static/media/favicon.3f1073f50bc1d46a6208.png",
+    "static/media/goku.webp": "/dragonball/static/media/goku.9faa4421d4d3a7e8aa49.webp",
+    "index.html": "/dragonball/index.html",
+    "main.e7143ad2.css.map": "/dragonball/static/css/main.e7143ad2.css.map",
+    "main.bc49bd76.js.map": "/dragonball/static/js/main.bc49bd76.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e7143ad2.css",
+    "static/js/main.bc49bd76.js"
+  ]
+}
