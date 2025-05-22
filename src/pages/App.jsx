@@ -1,5 +1,5 @@
 import "../assets/styles/Main.css";
-import { BrowserRouter,Routes,Route} from "react-router-dom";
+import {HashRouter as BrowserRouter,Routes,Route} from "react-router-dom";
 import Inicio from "./Inicio.jsx";
 import Personajes from "./Personajes.jsx";
 import Arcos from "./Arcos.jsx";
